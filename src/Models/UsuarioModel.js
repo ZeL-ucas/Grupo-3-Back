@@ -4,28 +4,30 @@ const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema;
 
 const UsuarioSchema = new Schema({
+  email: {
+    type: String,
+    unique: true,
+  },
+
+  senha: {
+    type: String,
+    select: false,
+  },
   nome: {
     type: String,
     unique: true,
   },
   cargo: String,
-  email: {
-    type: String,
-    unique: true,
-  },
   info_adicionais: String,
-  senha: {
-    type: String,
-    select: false,
-  },
-  /* plantao: {
+
+  plantao: {
     type: Boolean,
-    default: false,
     select: false,
-  },*/
+    default: false,
+  },
 });
 UsuarioSchema.pre("save", async function (next) {
-  console.log("oiii", next);
+  console.log(this);
   const user = this;
 
   if (user.isModified("senha")) {
