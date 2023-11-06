@@ -13,7 +13,10 @@ const create = validateRequest({
 
 const destroy = validateRequest({
   params: z.object({
-    id: z.custom(mongoose.isValidObjectId, "O Id da atividade não é válido"),
+    id_usuario: z.custom(
+      mongoose.isValidObjectId,
+      "O Id do usuário não é válido não é válido"
+    ),
   }),
 });
 

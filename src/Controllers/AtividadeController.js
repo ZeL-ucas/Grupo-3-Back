@@ -1,8 +1,16 @@
 const AtividadeModel = require("../Models/AtividadeModel");
+const UsuarioModel = require("../Models/UsuarioModel");
 
 class AtividadeController {
   async create(req, res) {
     try {
+      const UsuarioEncontrado = await UsuarioModel.findById(
+        req.body.id_usuario
+      );
+
+      if (!UsuarioEncontrado)
+        return res.status(404).json({ message: "Usuario não encontrado" });
+
       const atividade = await AtividadeModel.create(req.body);
 
       return res.status(200).json(atividade);
@@ -14,7 +22,7 @@ class AtividadeController {
   async read(req, res) {
     try {
       const atividade = await AtividadeModel.find().populate(
-        "id_usario",
+        "id_usuario",
         "-senha"
       );
 
@@ -26,9 +34,14 @@ class AtividadeController {
 
   async delete(req, res) {
     try {
-      const { id } = req.params;
+      const { id_usuario } = req.params;
 
-      await AtividadeModel.findByIdAndDelete(id);
+      const AtividadeEncontrada = await AtividadeModel.findOne({ id_usuario });
+
+      if (!AtividadeEncontrada)
+        return res.status(404).json({ message: "Atividade não encontrada" });
+
+      await AtividadeEncontrada.deleteOne();
 
       return res
         .status(200)

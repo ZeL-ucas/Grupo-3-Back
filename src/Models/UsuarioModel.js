@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const AtividadeModel = require("./AtividadeModel");
 
 const Schema = mongoose.Schema;
 
@@ -39,7 +40,11 @@ UsuarioSchema.pre("save", async function (next) {
 
   next();
 });
+UsuarioSchema.pre("deleteOne", async function () {
+  const usuario = this;
 
+  return AtividadeModel.deleteOne({ id_usuario: usuario._id });
+});
 const UsuarioModel = mongoose.model("usuario", UsuarioSchema);
 
 module.exports = UsuarioModel;

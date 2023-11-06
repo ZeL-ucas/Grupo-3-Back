@@ -23,11 +23,18 @@ class PlantaoController {
 
   async delete(req, res) {
     try {
-      const { id } = req.params;
+      const { id_usuario } = req.params;
 
-      await PlantaoModel.findByIdAndDelete(id);
+      const PlantaoEncontrado = await PlantaoModel.findOne({ id_usuario });
 
-      return res.status(200).json({ mensagem: "Plantao deletada com sucesso" });
+      if (!PlantaoEncontrado)
+        return res.status(404).json({ message: "Plantão não encontrada" });
+
+      await PlantaoEncontrado.deleteOne();
+
+      return res
+        .status(200)
+        .json({ mensagem: "Atividade deletada com sucesso" });
     } catch (error) {
       res.status(500).json({ message: "Deu ruim aqui!", error: error.message });
     }
