@@ -9,10 +9,7 @@ const AtividadeSchema = new Schema(
       ref: "usuario",
       unique: true,
     },
-    id_hospital: {
-      type: Schema.Types.ObjectId,
-      ref: "hospital",
-    },
+    hospital: String,
     cargo: String,
     entrada: Date,
   },

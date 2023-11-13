@@ -22,7 +22,6 @@ const destroy = validateRequest({
 const update = validateRequest({
   body: z.object({
     nome: z.string().optional(),
-    cpf: z.number().optional(),
     cargo: z.string().optional(),
     email: z.string().email("O email é invalido").optional(),
     senha: z.string().optional(),

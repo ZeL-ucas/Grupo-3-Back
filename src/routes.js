@@ -4,6 +4,7 @@ const AtividadeController = require("./Controllers/AtividadeController");
 const PlantaoController = require("./Controllers/PlantaoController");
 const UsuarioValidator = require("./Validators/UsuarioValidator");
 const AtividadeValidator = require("./Validators/AtividadeValidator");
+const PlantaoValidator = require("./Validators/PlantaoValidator");
 const AuthController = require("./Controllers/AuthController");
 const AuthValidator = require("./Validators/AuthValidator");
 const Verificarjwt = require("./Middleware/Verificarjwt");
@@ -48,6 +49,7 @@ rotas.post(
   "/plantao",
   Verificarjwt,
   VerificarUsuario,
+  PlantaoValidator.create,
   PlantaoController.create
 );
 rotas.get("/plantao", Verificarjwt, PlantaoController.read);
@@ -55,6 +57,7 @@ rotas.delete(
   "/plantao/:id_usuario",
   Verificarjwt,
   VerificarUsuario,
+  PlantaoValidator.destroy,
   PlantaoController.delete
 );
 

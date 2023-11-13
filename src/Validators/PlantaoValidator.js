@@ -8,6 +8,8 @@ const create = validateRequest({
       mongoose.isValidObjectId,
       "O Id do usuario não é válido"
     ),
+    cargo: z.string({ required_error: "O cargo é obrigatório" }),
+    hospital: z.string({ required_error: "O hospital é obrigatório" }),
   }),
 });
 
