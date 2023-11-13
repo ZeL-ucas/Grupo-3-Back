@@ -2,7 +2,6 @@ const UsuarioModel = require("../Models/UsuarioModel");
 
 class UsuarioController {
   async create(req, res) {
-    console.log(req.body);
     try {
       const usuario = await UsuarioModel.create(req.body);
 

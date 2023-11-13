@@ -28,7 +28,6 @@ const UsuarioSchema = new Schema({
   },
 });
 UsuarioSchema.pre("save", async function (next) {
-  console.log(this);
   const user = this;
 
   if (user.isModified("senha")) {
