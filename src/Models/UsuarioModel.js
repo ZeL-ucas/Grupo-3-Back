@@ -23,7 +23,6 @@ const UsuarioSchema = new Schema({
 
   plantao: {
     type: Boolean,
-    select: false,
     default: false,
   },
 });
